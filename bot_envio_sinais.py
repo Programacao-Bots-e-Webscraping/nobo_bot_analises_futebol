@@ -27,9 +27,14 @@ while True:
         try:
             tempo = int(lista[0].replace("'",''))
             if (35 <= tempo <= 40) or (75 <= tempo <= 85):
+                if tempo < 45:
+                    t = '1'
+                else:
+                    t = '2'
                 lista_inf = lista[1:-1]
                 inf = [lista_inf[i:i+2] for i in range(0,len(lista_inf),2)]
-                if (float(inf[5][0]) >= 0.0 or float(inf[5][1]) >= 0.0) and f'{inf[0][0]} x {inf[0][1]}' not in mensagens_enviadas:
+                controle_mensagens = f'{inf[0][0]} x {inf[0][1]}{t}'
+                if (float(inf[5][0]) >= 0.0 or float(inf[5][1]) >= 0.0) and controle_mensagens not in mensagens_enviadas:
             
             
                     mensagem = f'''
@@ -43,7 +48,7 @@ while True:
     Appm Jogo: {inf[5][0]} - {inf[5][1]}
     '''
                     enviar_mensagem(mensagem)
-                    mensagens_enviadas.append(f'{inf[0][0]} x {inf[0][1]}')
+                    mensagens_enviadas.append(controle_mensagens)
             
 
         except Exception as e:
